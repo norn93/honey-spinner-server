@@ -60,12 +60,41 @@ class Spinner:
             return False
         return True
 
+    def sendInstruction(self, instruction, value, value_type):
+        # Send any instruction
+        # value types:
+        # f float
+        # l long
+        # c character
+
+        self.radio.stopListening();
+        data = pack('<c' + value_type, instruction.encode(), value)
+        if not self.radio.write(data):
+            print("Sending failed")
+            return False
+        else:
+            print("Sending OK")
+        return True
+
+    def commandLineInterface(self):
+        # Send instructions from command line
+
+        while True:
+            c = input("Instruction character: ")
+
+            if c in ["s"]:
+                t = 'f'
+            else:
+                print("Invalid instruction: unknown type:", c)
+                continue
+
+            v = input("Instruction value: ")
+
+            result = self.sendInstruction(c, v, t)
+
+            print(result)
+
 if __name__ == "__main__":
     s = Spinner()
 
-    position = 0
-    while 1:
-        print(s.getLoad())
-        print(s.setSetpoint(position))
-        position += 0.0001
-        time.sleep(0.1)
+    s.commandLineInterface()
