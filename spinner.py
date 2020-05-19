@@ -83,9 +83,18 @@ class Spinner:
             c = input("Instruction character: ")
             v = input("Instruction value: ")
 
-            if c in ["s"]:
+            if c in ["s", "v", "a", "t", "f", "1", "0", "p", "c"]:
                 t = 'f'
                 v = float(v)
+            elif c in ["u"]:
+                t = 'l'
+                v = long(v)
+            elif c in ["m"]:
+                t = 'i'
+                v = int(v)
+            elif c in ["i", "r", "L", "C"]:
+                t = '?'
+                v = bool(v)
             else:
                 print("Invalid instruction: unknown type:", c)
                 continue

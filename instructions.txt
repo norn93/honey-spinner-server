@@ -1,0 +1,50 @@
+      case 'u':
+        stepperVelocityUpdateInterval = recievedParam.value.asLongInt;
+        break;
+      case 'i':
+        stepperInvertDirection = recievedParam.value.asBool;
+        break;
+      case 'm':
+        stepperMicroStepping = recievedParam.value.asInt;
+        break;
+      case 'v':
+        stepperMaxSpeed = recievedParam.value.asFloat;
+        break;
+      case 's':
+        setStepperPosition(recievedParam.value.asFloat);
+        break;
+      case 'a':
+        stepperMaxAcceleration = recievedParam.value.asFloat;
+        break;
+      case 't':
+        stepperMinSpeed = recievedParam.value.asFloat;
+        break;
+      case 'f':
+        stepperSmoothingFactor = recievedParam.value.asFloat;
+        break;
+      case 'r':
+        stepperResetOnStop = recievedParam.value.asBool;
+        break;
+      case '1':
+        stepperMaximumPosition = recievedParam.value.asFloat;
+        break;
+      case '0':
+        stepperMinimumPosition = recievedParam.value.asFloat;
+        break;
+      case 'p':
+        stepperMetresPerRevolution = recievedParam.value.asFloat;
+        break;
+
+      case 'L':
+        sendLoadCellData();
+        break;
+
+      case 'C':
+        if (stepperCalibrationState == 'c') {
+          stepperCalibrationState = 'n';
+        }
+        break;
+
+      case 'c':
+        stepperCalibrationClearance = recievedParam.value.asFloat;
+        break;
