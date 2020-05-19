@@ -6,8 +6,8 @@ from struct import *
 
 class Spinner:
     def __init__(self):
-
         # Set up the radio
+
         pipes = ["1Node", "2Node"]
 
         self.radio = NRF24()
@@ -41,17 +41,31 @@ class Spinner:
         self.radio.startListening();
 
         while not self.radio.available([0], False):
-            print(self.radio.get_status())
+            pass
         print("Message received")
         recv_buffer = []
         self.radio.read(recv_buffer, 32)
 
         data = list(unpack('<llllllll', bytes(recv_buffer)))
 
-        print(data)
+        return data
+
+    def setSetpoint(self, setpoint):
+        # Set the setpoint of the stepper (mm)
+
+        self.radio.stopListening();
+
+        data = pack('<cf', b's', setpoint)
+        if not self.radio.write(data):
+            return False
+        return True
 
 if __name__ == "__main__":
     s = Spinner()
+
+    position = 0
     while 1:
-        s.getLoad()
-        time.sleep(1)
+        print(s.getLoad())
+        print(s.setSetpoint(position))
+        position += 0.0001
+        time.sleep(0.1)
