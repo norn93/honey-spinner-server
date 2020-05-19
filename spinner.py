@@ -81,14 +81,14 @@ class Spinner:
 
         while True:
             c = input("Instruction character: ")
+            v = input("Instruction value: ")
 
             if c in ["s"]:
                 t = 'f'
+                v = float(v)
             else:
                 print("Invalid instruction: unknown type:", c)
                 continue
-
-            v = input("Instruction value: ")
 
             result = self.sendInstruction(c, v, t)
 
