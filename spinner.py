@@ -5,7 +5,7 @@ import time
 from struct import *
 
 class Spinner:
-	def __init__(self):
+    def __init__(self):
 
         # Set up the radio
         pipes = ["1Node", "2Node"]
