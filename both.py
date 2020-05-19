@@ -66,6 +66,13 @@ while True:
 
     midpoint = 1853554.375
     unit = 10000
-    print((sum(data)/8 - midpoint)/unit)
+    setpoint = (sum(data)/8 - midpoint)/unit
 
-    time.sleep(0.5)
+    print(setpoint)
+
+    radio.stopListening();
+    data = pack('<cf', b's', setpoint/1000/10)
+    if not radio.write(data):
+        print("Sending failed")
+
+    time.sleep(0.1)
